@@ -1,0 +1,257 @@
+
+	@mixin center ($value){
+		text-align: center;
+		line-height: $value;
+	}
+	@mixin boxCenter ($value){
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-left: -#{$value*0.5}rpx;
+		margin-top: -#{$value*0.5}rpx;
+	}
+	@mixin borderBox {
+		box-sizing: border-box;
+	}
+	@mixin border {
+		border-radius: 8rpx;
+		padding: 10rpx 8rpx;
+		border: 2px solid rgb(53, 168, 255);
+	}
+	@mixin input {
+		font-size:32rpx;
+		line-height:42rpx;
+		color:rgba(162,164,185,1);
+		margin-bottom: 6rpx;
+	}
+	@mixin lineHeight($height){
+		height:$height;
+		line-height:$height;
+	}
+	@mixin absoluteCss($top,$left){
+		position:absolute;
+		top: $top;
+		left:$left;
+	}
+	@mixin flexCss($direction) {
+	  @if $direction == row  { 
+        display: flex;
+		align-items: center;
+	  	justify-content: space-between;	
+	  } @else if $direction == column{
+		display: flex;
+		flex-direction: column;
+	  }
+	}
+	page{
+		.self-index{
+			.finsh{
+				width:100rpx;
+				height:60rpx;
+				background:rgba(255,255,255,1);
+				border-radius:10rpx;
+				font-size:30rpx;	
+				color:rgba(53,168,255,1);				
+				@include center(60rpx);
+			}
+			.content{
+				padding: 30rpx 32rpx;
+				/*公共样式*/
+				.title{
+					font-size: 28rpx;
+					font-weight: 600;
+					color: #313131;
+					margin: 5px 0 5px 0;
+				}
+				.titles{
+					font-size: 22rpx;
+					color: #707084;
+					margin: 5px 0 5px 0;
+				}
+				.titleNormal{
+					font-size: 28rpx;
+					font-weight: 600;
+					color: #313131;
+					margin: 5px 0 5px 0;
+				}
+				.icon-to{
+					color: #666666!important;
+				}
+				.card{
+					@include borderBox();
+					@include flexCss(row);
+					padding: 10rpx 0;
+					width: 100%;
+					.cardItem{
+						width: 260rpx;
+						.inputNormal{
+							@include flexCss(row);
+							height: 46rpx;
+							padding: 10rpx;
+							border: 2px solid #35a8ff;
+							background-color: #deeefb;
+						}
+						.cardVal {
+							width: 240rpx;
+							@include border;
+							@include flexCss(row);
+							background-color: #deeefb;
+							.inp {
+								color: #313131;
+								flex: 1;
+							}
+							.dw {
+								text-align: right;
+								font-size: 24rpx;
+								color: #999999;
+							}
+						}
+					}
+					.inputBig{
+						@include border;
+						@include flexCss(row);
+						width: 100%;
+						background-color: #deeefb;
+						
+					}
+				}
+				// 随访信息
+				.jbxxBox{
+					@include borderBox()
+					position:relative;
+					.rytype{
+						@include lineHeight(68rpx)
+						@include absoluteCss(-20rpx,-30rpx)
+						width:calc(100% + 60rpx);
+						background:rgba(255,230,0,0.2);
+						font-size: 24rpx;
+						text-indent: 30rpx;
+						color:rgba(5,7,70,1);
+					}
+					.sfxx{
+						padding-top: 10rpx;
+						.time{
+							font-size:30rpx;
+							color:rgba(0,2,52,1);
+						}
+					}
+					.sfImg{
+						.imgBox{
+							@include flexCss(row)
+							.img{
+								border-radius: 10rpx;
+								margin-bottom: 10rpx;
+								height:240rpx;
+								background:rgba(255,255,255,1);
+								border: 2rpx dotted rgba(162,164,185,1);
+								position: relative;
+								overflow: hidden;
+                                flex: 1;
+								img{
+									width: 100%;
+								}
+								.icon-paizhaozhaopian{
+									color: #666666;
+									@include  boxCenter(44);
+									font-size: 44rpx;
+								}
+							}
+						}
+						.imgReason{
+							.cardVal{
+								@include border;
+                                background-color: #deeefb;
+								.inp{
+									@include input;
+								}
+							}
+							
+						}
+					}
+				}
+				// 转诊
+				.zzhenBox{
+					.addIcon{
+						width: 100%;
+						@include lineHeight(85rpx);
+						text-align: center;
+						display: flex;
+						.btn{
+							border-top-right-radius:8rpx;
+							border-bottom-right-radius:8rpx;
+							color: #FFFFFF;
+							background-color:#74baef ;
+							width: 50%;
+							.iconfont{
+								color: #FFFFFF;
+							}
+						}
+					}
+					.resert{
+						border-top-left-radius:8rpx;
+						border-bottom-left-radius:8rpx;
+						width: 50%;
+						color: #FFFFFF;
+						background-color: #969696!important;
+					}
+				}
+				// 随访信息
+				.sfxxBox{
+					.card{
+						@include flexCss(row);
+						@include border;
+						.sfTime{
+							font-size:30rpx;
+							color: #333333;
+						}
+						.icon-Iconmaterial-date-range{
+							font-size: 26rpx;
+							color: #666666;
+						}
+						.qmBox{
+							border: 1px dotted rgba(162,164,185,1);
+							margin-bottom: 10rpx;
+							width:100%;
+							text-align: center;
+							height:180rpx;
+							position: relative;
+							overflow: hidden;
+							img{
+								position: absolute;
+								top: 50%;
+								left: 50%;
+								margin-top: -120rpx;
+								margin-left: -180rpx;
+								transform: rotate(-90deg);
+								width: 180rpx;
+							}
+							.icon-weiqianzi{
+								font-size: 65rpx;
+								@include center(136rpx);
+								color: #666666;
+							}
+						}
+					}
+				}	
+			}
+		}
+	}
+	// 缺项提示
+	.redBorder{
+		border-color:#e49595!important;
+	}
+	.redColor{
+		padding: 8rpx;
+		border-radius: 8rpx;
+		border: 2px solid #e49595!important;
+		background-color: #f9e2e2!important;
+	}
+	.fontColor{
+		color: #e49595!important;
+	}
+	// 禁用样式
+	.disabled, .uni-input:disabled{
+		border-radius: 8rpx;
+	    border: 2px solid #d2cece!important;   
+	    background-color: #F5F5F5!important;
+	}  
