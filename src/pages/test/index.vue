@@ -99,8 +99,19 @@
     const changeNum = () => {
      sum.value++
     }
+   const msg = reactive({
+    content: '__ruiming__',
+    type: '1',
+    time: '1',
+    isMe: '1'
+   })
     const initSqlite = () => {
-     $mySqlite.insertMsg("ruiming",'插入数据',res => {
+      // uni.getSavedFileList({
+      //   success: function (res) {
+      //     console.log(res.fileList)
+      //   }
+      // })
+     $mySqlite.insertMsg("ruiming",msg,res => {
   	  console.log(res)
      })
     }
