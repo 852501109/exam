@@ -6,6 +6,7 @@ README.md
 custom
 src/pages/home
 src/utils/bluetools
+src/utils/sqlit
 src/common
 .prettier.js
 .eslintrc.js

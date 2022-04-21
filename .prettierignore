@@ -4,6 +4,7 @@ public
 uni_modules
 src/pages/home
 src/utils/bluetools
+src/utils/sqlit
 src/common
 README.md
 custom
