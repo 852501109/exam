@@ -93,7 +93,7 @@
   	{ id: 4, title: 'xxxx', isRightText: '', path: '', isRouter: false, src: '' },
   	{ id: 5, title: 'xxxx', isRightText: '', path: '', isRouter: false, src: '' },
   	{ id: 6, title: 'xxxx', isRightText: '', path: '', isRouter: false, src: '' },
-  	{ id: 7, title: '设置', isRightText: '', path: '/pages/setting/setting', isRouter: true, src: '' },
+  	{ id: 7, title: '设置', isRightText: '', path: '/pages/setting/mineSetting', isRouter: true, src: '' },
   ])
   const goRouter = (item) => {
   	if(item.isRouter) {

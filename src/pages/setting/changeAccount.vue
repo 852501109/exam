@@ -14,12 +14,7 @@
         <uni-easyinput v-model="form.vertifacode" type="text" placeholder="请输入验证码" />
         <c-timer-btn ref="timer" style="margin-top:10px;" @run="uptet"></c-timer-btn>
       </uni-forms-item>
-      <button
-        style="width:90%;margin:0 auto;background:#F98038;color: #fff;margin-top: 200rpx;"
-        @click="submit"
-      >
-        下一步
-      </button>
+      <button class="submit" @click="submit">下一步</button>
     </uni-forms>
   </view>
 </template>
@@ -75,5 +70,9 @@
   	top: 10rpx;
   	width: 90%;
   	margin: 0 auto;
+  }
+  .submit {
+   background: $uni-color-primary;
+   color: #fff;
   }
 </style>

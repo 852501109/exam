@@ -6,7 +6,7 @@
 !-->
 <template>
   <view>
-    <view>我就是单纯的想知道vue2的语法可以不可兼容</view>
+    <view>vue3兼容部分vue2</view>
     <pressure @setPressure="setPressure"></pressure>
   </view>
 </template>

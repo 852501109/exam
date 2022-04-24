@@ -142,7 +142,7 @@
     color: $uni-color-primary;
      button {
       font-size: 25rpx;
-      background: $uni-color-primary;;
+      background: $uni-color-primary;
       color: #fff;
      }
   h3 {
