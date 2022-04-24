@@ -43,10 +43,33 @@
         {
             "path" : "pages/tabber/tabberMy",
             "style" : {
-                "navigationBarTitleText" : "我的",
+                "navigationBarTitleText" : "Vue3",
                 "navigationStyle" : "custom"
             }
         },
+		{
+		    "path" : "pages/tabber/tabberMine",
+		    "style" : {
+		        "navigationBarTitleText" : "我的",
+		        "navigationStyle" : "custom"
+		    }
+		},
+		{
+			"path": "pages/setting/mineSetting",
+			"style": {
+				"navigationBarTitleText": "设置",
+				"navigationStyle" : "custom"
+			}
+
+		},
+		{
+			"path": "pages/setting/changeAccount",
+			"style": {
+				"navigationBarTitleText": "更换账号",
+				"navigationStyle" : "custom"
+			}
+
+		},
         {
             "path" : "App",
             "style" : {}
@@ -70,12 +93,18 @@
                 "selectedIconPath" : "",
                 "text" : "首页"
             },
-            {
-                "pagePath" : "pages/tabber/tabberMy",
-                "iconPath" : "",
-                "selectedIconPath" : "",
-                "text" : "我的"
-            }
+			{
+			    "pagePath" : "pages/tabber/tabberMy",
+			    "iconPath" : "",
+			    "selectedIconPath" : "",
+			    "text" : "Vue3"
+			},
+			{
+			    "pagePath" : "pages/tabber/tabberMine",
+			    "iconPath" : "",
+			    "selectedIconPath" : "",
+			    "text" : "我的"
+			}
         ]
     }
 }

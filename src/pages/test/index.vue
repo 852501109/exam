@@ -42,86 +42,95 @@
       <h3>示例9:sqlite</h3>
       <button @click="initSqlite">sqlite</button>
     </view>
+    <view>
+      <h3>示例10:todo</h3>
+      <button @click="customClickHandle({id:1})">todo</button>
+    </view>
   </view>
 </template>
 
 <script setup lang="ts">
-    import { GlobalStore } from '@/store/modules/global'
-    import { onBeforeMount, onMounted, nextTick, ref, reactive } from 'vue'
-    import child from '@/components/childTest.vue'
-    import childTwo from '@/components/childTwoTest.vue'
-    import childThree from '@/components/childThreeTest.vue'
-    import childFour from '@/components/childFourTest.vue'
-    import usePoint from "@/hook/usePoint"
-    import $request from '@/utils/request/index'
-    import { provide } from "vue"
-    import $mySqlite from '@/utils/sqlit/mySqlite.js'
-    provide("provideName", "陈文权")
-    onBeforeMount(() => {
-      console.log('onBeforeMount生命周期')
-    })
-    onMounted(() => {
-      console.log('onMounted生命周期')
-      console.log($request)
-      $mySqlite.openComDB('chenwenquan',res => {
-   	    console.log(res)
+     import { GlobalStore } from '@/store/modules/global'
+     import { onBeforeMount, onMounted, nextTick, ref, reactive } from 'vue'
+     import child from '@/components/childTest.vue'
+     import childTwo from '@/components/childTwoTest.vue'
+     import childThree from '@/components/childThreeTest.vue'
+     import childFour from '@/components/childFourTest.vue'
+     import usePoint from "@/hook/usePoint"
+     import $request from '@/utils/request/index'
+     import { provide } from "vue"
+     import $mySqlite from '@/utils/sqlit/mySqlite.js'
+     provide("provideName", "陈文权")
+     onBeforeMount(() => {
+       console.log('onBeforeMount生命周期')
+     })
+     onMounted(() => {
+       console.log('onMounted生命周期')
+       console.log($request)
+       $mySqlite.openComDB('chenwenquan',res => {
+    	    console.log(res)
+       })
+    //删除通信表
+       $mySqlite.deleteTable("ruiming",res => {
+    	    console.log(res)
+       })
+   //创建通信表
+      $mySqlite.createChat("ruiming",res => {
+    	    console.log(res)
       })
-   //删除通信表
-      $mySqlite.deleteTable("ruiming",res => {
-   	    console.log(res)
+   //获取所有表
+      $mySqlite.getAllTable(res => {
+    	    console.log(res)
       })
-  //创建通信表
-     $mySqlite.createChat("ruiming",res => {
-   	    console.log(res)
-     })
-  //获取所有表
-     $mySqlite.getAllTable(res => {
-   	    console.log(res)
-     })
-   })
-    const sum = ref(0)
-    const point = usePoint()
-    const state = reactive({
-      name: 'zhangsan'
     })
-    const stateTwo = reactive({
-      name: 'Jerry',
-      age: 20
-    })
-    const store = GlobalStore()
-    const childRef = ref<InstanceType<typeof childThree>>()
-    const clickHandle = () => {
-      store.setXXX(store.a = store.a + 1)
-    }
-    const updateName = () => {
-      state.name = state.name === 'chenwenquan' ? 'zhangsan' : 'chenwenquan'
-    }
-    const changeNum = () => {
-     sum.value++
-    }
-   const msg = reactive({
-    content: '__ruiming__',
-    type: '1',
-    time: '1',
-    isMe: '1'
-   })
-    const initSqlite = () => {
-      // uni.getSavedFileList({
-      //   success: function (res) {
-      //     console.log(res.fileList)
-      //   }
-      // })
-     $mySqlite.insertMsg("ruiming",msg,res => {
-  	  console.log(res)
+     const sum = ref(0)
+     const point = usePoint()
+     const state = reactive({
+       name: 'zhangsan'
      })
-    }
-    // nextTick
-    nextTick(() => {
-      // 获取子组件name
-      console.log(childRef.value.name)
-      // 执行子组件方法
-      childRef.value.changeName()
+     const stateTwo = reactive({
+       name: 'Jerry',
+       age: 20
+     })
+     const store = GlobalStore()
+     const childRef = ref<InstanceType<typeof childThree>>()
+     const clickHandle = () => {
+       store.setXXX(store.a = store.a + 1)
+     }
+  // todo看这 这里是数据交互:存储
+  const customClickHandle = val => {
+    store.setSqlite(store.globalSqlite = val)
+    console.log(store.globalSqlite)
+  }
+     const updateName = () => {
+       state.name = state.name === 'chenwenquan' ? 'zhangsan' : 'chenwenquan'
+     }
+     const changeNum = () => {
+      sum.value++
+     }
+    const msg = reactive({
+     content: '__ruiming__',
+     type: '1',
+     time: '1',
+     isMe: '1'
     })
+     const initSqlite = () => {
+       // uni.getSavedFileList({
+       //   success: function (res) {
+       //     console.log(res.fileList)
+       //   }
+       // })
+      $mySqlite.insertMsg("ruiming",msg,res => {
+   	  console.log(res)
+      })
+     }
+     // nextTick
+     nextTick(() => {
+       // 获取子组件name
+       console.log(childRef.value.name)
+       // 执行子组件方法
+       childRef.value.changeName()
+     })
 </script>
 
 <style lang="scss">

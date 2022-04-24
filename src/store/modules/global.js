@@ -8,11 +8,15 @@ export const GlobalStore = defineStore({
   // state: 返回对象的函数
   state: () => ({
     a: 1,
+    globalSqlite: {},
   }),
   getters: {},
   actions: {
     setXXX(number) {
       this.a = number
+    },
+    setSqlite(obj) {
+      this.globalSqlite = obj
     },
   },
 })
