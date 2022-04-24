@@ -2,7 +2,7 @@
     "name" : "坤昱体检采集端",
     "appid" : "__UNI__5EB2FE1",
     "description" : "",
-    "versionName" : "1.0.0",
+    "versionName" : "1.0.1",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
@@ -11,36 +11,96 @@
         "compilerVersion" : 3,
         "splashscreen" : {
             "alwaysShowBeforeRender" : true,
-            "waiting" : true,
+            "waiting" : false,
             "autoclose" : true,
             "delay" : 0
         },
         "modules" : {
-            "Bluetooth" : {}
+            "Bluetooth" : {},
+            "SQLite" : {},
+            "Contacts" : {}
         },
         "distribute" : {
             "android" : {
                 "permissions" : [
-                    "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
-                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
-                    "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
-                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
-                    "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
-                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.CAMERA\"/>",
-                    "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
-                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
-                    "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
                     "<uses-feature android:name=\"android.hardware.camera\"/>",
-                    "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
+                    "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.BIND_PRINT_SERVICE\"/>",
+                    "<uses-permission android:name=\"android.permission.BLUETOOTH\"/>",
+                    "<uses-permission android:name=\"android.permission.BLUETOOTH_ADMIN\"/>",
+                    "<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
+                    "<uses-permission android:name=\"android.permission.CAMERA\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+                    "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+                    "<uses-permission android:name=\"android.permission.INTERNET\"/>",
+                    "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
+                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_HISTORY_BOOKMARKS\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_SMS\"/>",
+                    "<uses-permission android:name=\"android.permission.BLUETOOTH\"/>",
+                    "<uses-permission android:name=\"android.permission.BLUETOOTH_ADMIN\"/>"
                 ]
             },
             "ios" : {},
             "sdkConfigs" : {
-                "ad" : {}
+                "ad" : {},
+                "speech" : {},
+                "statics" : {}
+            },
+            "splashscreen" : {
+                "androidStyle" : "common",
+                "androidTranslucent" : true,
+                "android" : {
+                    "hdpi" : "static/res/splash/sm.png",
+                    "xhdpi" : "static/res/splash/md.png",
+                    "xxhdpi" : "static/res/splash/lg.png"
+                }
+            },
+            "icons" : {
+                "android" : {
+                    "hdpi" : "static/res/icons/72x72.png",
+                    "xhdpi" : "static/res/icons/96x96.png",
+                    "xxhdpi" : "static/res/icons/144x144.png",
+                    "xxxhdpi" : "static/res/icons/192x192.png"
+                },
+                "ios" : {
+                    "appstore" : "static/res/icons/1024x1024.png",
+                    "iphone" : {
+                        "app@2x" : "static/res/icons-ios/120x120.png",
+                        "app@3x" : "static/res/icons-ios/180x180.png",
+                        "spotlight@2x" : "static/res/icons-ios/80x80.png",
+                        "spotlight@3x" : "static/res/icons-ios/120x120.png",
+                        "settings@2x" : "static/res/icons-ios/58x58.png",
+                        "settings@3x" : "static/res/icons-ios/87x87.png",
+                        "notification@3x" : "static/res/icons-ios/60x60.png",
+                        "notification@2x" : "static/res/icons-ios/40x40.png"
+                    },
+                    "ipad" : {
+                        "app" : "static/res/icons-ios/76x76.png",
+                        "app@2x" : "static/res/icons-ios/152x152.png",
+                        "proapp@2x" : "static/res/icons-ios/167x167.png",
+                        "spotlight" : "static/res/icons-ios/40x40.png",
+                        "spotlight@2x" : "static/res/icons-ios/80x80.png",
+                        "settings" : "static/res/icons-ios/29x29.png",
+                        "settings@2x" : "static/res/icons-ios/58x58.png",
+                        "notification" : "static/res/icons-ios/20x20.png",
+                        "notification@2x" : "static/res/icons-ios/40x40.png"
+                    }
+                }
             }
         },
         "nativePlugins" : {

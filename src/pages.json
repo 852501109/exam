@@ -1,49 +1,81 @@
 {
-  "easycom": {
-	"custom": {  
-		"^c-(.*)": "@/custom/components/c-$1/c-$1.vue"
-	}
-  },
-  "pages": [
-	  {
-	    "path": "pages/tabber/tabberHome",
-	    "style": {
-	      "navigationBarTitleText": "首页",
-		  "navigationStyle": "custom"
-	    }
-	  },
-	  {
-	    "path": "pages/tabber/tabberMy",
-	    "style": {
-	      "navigationBarTitleText": "我的",
-	  		  "navigationStyle": "custom"
-	    }
-	  }
-  ],
-  "globalStyle": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
-  },
-  "tabBar": {
-  		"color": "#fff",
-  		"selectedColor": "#FFB40E",
-  		"borderStyle": "black",
-  		"backgroundColor": " #007aff",
-  		"list": [{
-  				"pagePath": "pages/tabber/tabberHome",
-  				"iconPath": "",
-  				"selectedIconPath": "",
-  				"text": "首页"
-  			},
-  
-  			{
-  				"pagePath": "pages/tabber/tabberMy",
-  				"iconPath": "",
-  				"selectedIconPath": "",
-  				"text": "我的"
-  			}
-  		]
-  	}
+    "easycom" : {
+        "custom" : {
+            "^c-(.*)" : "@/custom/components/c-$1/c-$1.vue"
+        }
+    },
+    "pages" : [
+        {
+            "path" : "pages/login/login",
+            "style" : {
+                "navigationBarTitleText" : "登陆",
+                "navigationStyle" : "custom"
+            }
+        },
+        {
+            "path" : "pages/login/register",
+            "style" : {
+                "enablePullDownRefresh" : true,
+                "navigationBarTitleText" : "注册"
+            }
+        },
+        {
+            "path" : "pages/login/certification",
+            "style" : {
+                "enablePullDownRefresh" : true,
+                "navigationBarTitleText" : "实名认证"
+            }
+        },
+        {
+            "path" : "pages/login/forgetPassword",
+            "style" : {
+                "enablePullDownRefresh" : false,
+                "navigationBarTitleText" : "修改密码"
+            }
+        },
+        {
+            "path" : "pages/tabber/tabberHome",
+            "style" : {
+                "navigationBarTitleText" : "首页",
+                "navigationStyle" : "custom"
+            }
+        },
+        {
+            "path" : "pages/tabber/tabberMy",
+            "style" : {
+                "navigationBarTitleText" : "我的",
+                "navigationStyle" : "custom"
+            }
+        },
+        {
+            "path" : "App",
+            "style" : {}
+        }
+    ],
+    "globalStyle" : {
+        "navigationBarTextStyle" : "black",
+        "navigationBarTitleText" : "uni-app",
+        "navigationBarBackgroundColor" : "#F8F8F8",
+        "backgroundColor" : "#F8F8F8"
+    },
+    "tabBar" : {
+        "color" : "#fff",
+        "selectedColor" : "#FFB40E",
+        "borderStyle" : "black",
+        "backgroundColor" : " #007aff",
+        "list" : [
+            {
+                "pagePath" : "pages/tabber/tabberHome",
+                "iconPath" : "",
+                "selectedIconPath" : "",
+                "text" : "首页"
+            },
+            {
+                "pagePath" : "pages/tabber/tabberMy",
+                "iconPath" : "",
+                "selectedIconPath" : "",
+                "text" : "我的"
+            }
+        ]
+    }
 }

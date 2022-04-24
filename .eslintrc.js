@@ -154,7 +154,8 @@ module.exports = {
     withDefaults: 'readonly',
 	uni: true, 
 	wx: true,
-	plus: true
+	plus: true,
+	cTimerBtn: true
   },
 }
 
