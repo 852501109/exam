@@ -19,14 +19,15 @@
   </view>
 </template>
 
-<script setup>
+<script setup lang="ts">
   import {ref, reactive} from 'vue'
   	const form = reactive({
   		cell: '',
   		vertifacode: ''
   	})
+  	const timer = ref<InstanceType<typeof cTimerBtn>>()
   	const uptet = () => {
-  		console.log(1)
+  		timer.value.start()
   	}
   	const toast = (text) => {
   		uni.showToast({
