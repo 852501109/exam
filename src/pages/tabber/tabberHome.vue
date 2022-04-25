@@ -10,18 +10,11 @@
     <pressure @setPressure="setPressure"></pressure>
   </view>
 </template>
-<script>
-  import pressure from '../home/diseaseVisit/bluetooth/pressure'
-    export default {
-   components: {pressure},
-   data () {
-   	return {
-   	}
-   },
-    	computed: {},
-    	mounted() {},
-    	methods: {}
-    }
+<script setup>
+  import pressure from '@/components/diseaseVisit/bluetooth/pressure'
+  const setPressure = res => {
+    console.log(res)
+  }
 </script>
 <style scoped lang="scss">
   view {

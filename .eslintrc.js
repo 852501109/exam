@@ -39,7 +39,7 @@ module.exports = {
     'no-var': 'error',
     'prettier/prettier': 'error',
     // 禁止出现console
-    'no-console': 'warn',
+    // 'no-console': 'warn',
     // 禁用debugger
     'no-debugger': 'warn',
     // 禁止出现重复的 case 标签
@@ -115,7 +115,7 @@ module.exports = {
     // 禁止 if 作为唯一的语句出现在 else 语句中
     'no-lonely-if': 'warn',
     // 禁止空格和 tab 的混合缩进
-    'no-mixed-spaces-and-tabs': 'warn',
+    // 'no-mixed-spaces-and-tabs': 'warn',
     // 禁止出现多行空行
     'no-multiple-empty-lines': 'warn',
     // 禁止出现;

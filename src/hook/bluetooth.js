@@ -119,7 +119,7 @@ export default function () {
   }
   // 连接低功耗蓝牙
   const createBLEConnection = () => {
-    // let deviceId = this.equipment[0].deviceId
+    let deviceId = equipment[0].deviceId
     return new Promise((resolve, reject) => {
       uni.createBLEConnection({
         // 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接

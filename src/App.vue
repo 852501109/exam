@@ -20,37 +20,40 @@
   		// 	//console.log('打开数据库异常',e)
   		// }
   		//检验当前版本是不是最新
-  // 热更新
-  plus.runtime.getProperty(plus.runtime.appid, function(widgetInfo) {
-      uni.request({
-          url: 'http://www.example.com/update/',
-          data: {
-              version: widgetInfo.version,
-              name: widgetInfo.name
-          },
-          success: (result) => {
-              const data = result.data
-              if (data.update && data.wgtUrl) {
-                  uni.downloadFile({
-                      url: data.wgtUrl,
-                      success: (downloadResult) => {
-                          if (downloadResult.statusCode === 200) {
-                              plus.runtime.install(downloadResult.tempFilePath, {
-                                  force: false
-                              }, function() {
-                                  console.log('install success...')
-                                  plus.runtime.restart()
-                              }, function(e) {
-                                  console.error('install fail...')
-                              })
-                          }
-                      }
-                  })
-              }
-          }
-      })
-  })
-  // 以下是整包更新
+  		// 热更新
+  		plus.runtime.getProperty(plus.runtime.appid, function(widgetInfo) {
+  			uni.request({
+  				url: 'http://www.example.com/update/',
+  				data: {
+  					version: widgetInfo.version,
+  					name: widgetInfo.name
+  				},
+  				success: (result) => {
+  					const data = result.data
+  					if (data.update && data.wgtUrl) {
+  						uni.downloadFile({
+  							url: data.wgtUrl,
+  							success: (downloadResult) => {
+  								if (downloadResult.statusCode === 200) {
+  									plus.runtime.install(downloadResult
+  										.tempFilePath, {
+  											force: false
+  										},
+  										function() {
+  											console.log('install success...')
+  											plus.runtime.restart()
+  										},
+  										function(e) {
+  											console.error('install fail...')
+  										})
+  								}
+  							}
+  						})
+  					}
+  				}
+  			})
+  		})
+  		// 以下是整包更新
   		// const appId = plus.runtime.appid
   		// const version = plus.runtime.version
   		// const platform = uni.getSystemInfoSync().platform

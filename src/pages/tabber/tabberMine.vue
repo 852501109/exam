@@ -12,7 +12,7 @@
 
       <view class="inform">
         <navigator url="/pages/message/message" hover-class="navigator-hover">
-          <image src="../../../static/logo.png" mode=""></image>
+          <!--    <image src="../../../static/logo.png" mode=""></image> -->
         </navigator>
       </view>
 
@@ -35,7 +35,7 @@
         </view>
         <view class="right">
           <text v-show="item.id == 0">未认证</text>
-          <image src="../../static/c5.png" mode=""></image>
+          <image src="/static/c5.png" mode=""></image>
         </view>
       </view>
     </view>

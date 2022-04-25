@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-  import test from '../test/index'
+  import test from '../test/test'
 </script>
 
 <style></style>

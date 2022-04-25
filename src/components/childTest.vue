@@ -20,6 +20,6 @@
 
   const changeName = () => {
     // 执行
-    emit('updateName', 'Tom')
+    emit('updateName', 'zhangsan')
   }
 </script>

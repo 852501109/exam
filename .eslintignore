@@ -10,5 +10,7 @@ src/utils/sqlit
 src/common
 .prettier.js
 .eslintrc.js
+src/components/diseaseVisit
+src/components/bluetooth
 dist
 hook
