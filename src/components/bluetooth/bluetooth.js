@@ -1,4 +1,4 @@
-import { enableBAdapter } from './native-bluetooth.js'
+import { enableBAdapter } from '@/components/bluetooth/native-bluetooth.js'
 import kyble from './ble-proxy.js'
 import { ab2hex } from '@/common/tool.js'
 
