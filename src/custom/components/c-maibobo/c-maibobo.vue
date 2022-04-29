@@ -1,6 +1,5 @@
 <template>
 	<view>
-		<view>蓝牙流程统计</view>
 		<text class="tips">【脉搏波】先打开血压计电源，再点击按钮</text>
 		<button @tap="init">初始化蓝牙</button>
 		<button @tap="openConectWatch">开启连接监听</button>
@@ -14,15 +13,17 @@
 		<button @tap="openProtoWatch">开启服务协议通讯监听</button>
 		<button @tap="writeData">写数据</button>
 		<button @tap="closeBT">关闭蓝牙适配器</button>
-		<text  class="tips">总体流程</text>
+		<text 	class="tips">总体流程</text>
 		<button @tap="onece" :disabled="startButtonDisable">开始测量血压</button>
 		<button @tap="onClickStop" :disabled="stopButtonDisable">终止测量血压</button>
 	</view>
 	<view class="info">
-
-	  <text class="info-text">动态血压值：{{measureResult.PRS}}</text>
+	  <text class="text-info">{{infoText}}</text>
 	</view>
 	<view v-if="showFinalResult">
+	  <view class="">
+	    <text class="info-text">动态血压值{{measureResult.PRS}}</text>
+	  </view>
 	  <view class="">
 	    <text>用户编号: {{measureResult.USR}}</text>
 	  </view>
@@ -43,6 +44,8 @@
 <script setup>
 	import maiboboHook from "./maiboboHook"
 	const {
+		// 设备连接状态
+		infoText,
 		// 按钮禁用状态
 		stopButtonDisable,
 		startButtonDisable,

@@ -1,51 +1,44 @@
 <template>
   <view class="content">
-    ‘
-    <view>
-      <h3>示例1</h3>
-      <button @click="clickHandle">pinia</button>
-      <view class="title">pinia触发dispatch{{ store.a }}</view>
-    </view>
-    <view>
-      <h3>示例2</h3>
-      <child :name="state.name" @updateName="updateName" />
-    </view>
-    <view>
-      <h3>示例3</h3>
-      <childTwo v-model="stateTwo.name" v-model:age="stateTwo.age" @updateName="updateName" />
-    </view>
-    <view>
-      <h3>示例4</h3>
-      <button>nextTick演示</button>
-      <childThree ref="childRef" />
-    </view>
-    <view>
-      <h3>示例5</h3>
-      <h2>当前求和:{{ sum }}</h2>
-      <button @click="changeNum">点我加一</button>
-      <hr />
-      <h2 @click="savePonint">当前鼠标点击坐标为:x:{{ point.x }},y:{{ point.y }}</h2>
-    </view>
-    <view>
-      <h3>示例6:测试provide和inject方式传参</h3>
-      <childFour />
-    </view>
-    <view>
-      <h3>示例7:uni-ui图标</h3>
-      <uni-icons type="contact" size="30"></uni-icons>
-    </view>
-
-    <view>
-      <h3>示例9:sqlite</h3>
-      <button @click="initSqlite">sqlite</button>
-    </view>
-    <view>
-      <h3>示例10:todo</h3>
-      <button @click="customClickHandle({id:1})">todo</button>
-    </view>
+    <uni-section title="组件说明" type="line">
+      <uni-collapse v-model="accordionVal" accordion @change="change">
+        <uni-collapse-item title="父子组件通信示例1">
+          <child :name="state.name" @updateName="updateName" />
+        </uni-collapse-item>
+        <uni-collapse-item title="父子组件通信示例2">
+          <childTwo v-model="stateTwo.name" v-model:age="stateTwo.age" @updateName="updateName" />
+        </uni-collapse-item>
+        <uni-collapse-item title="父子组件通信示例3">
+          <childThree ref="childRef" />
+        </uni-collapse-item>
+        <uni-collapse-item title="nextTick演示">
+          <childTwo v-model="stateTwo.name" v-model:age="stateTwo.age" @updateName="updateName" />
+        </uni-collapse-item>
+        <uni-collapse-item title="父子组件通信示例3">
+          <childTwo v-model="stateTwo.name" v-model:age="stateTwo.age" @updateName="updateName" />
+        </uni-collapse-item>
+        <uni-collapse-item title="hook示例">
+          <h2>当前求和:{{ sum }}</h2>
+          <button @click="changeNum">点我加一</button>
+          <hr />
+          <h2 @click="savePonint">当前鼠标点击坐标为:x:{{ point.x }},y:{{ point.y }}</h2>
+        </uni-collapse-item>
+        <uni-collapse-item title="测试provide和inject方式传参">
+          <childFour />
+        </uni-collapse-item>
+        <uni-collapse-item title="uni-ui图标">
+          <childTwo v-model="stateTwo.name" v-model:age="stateTwo.age" @updateName="updateName" />
+        </uni-collapse-item>
+        <uni-collapse-item title="sqlite">
+          <button @click="initSqlite">sqlite</button>
+        </uni-collapse-item>
+        <uni-collapse-item title="todo">
+          <button @click="customClickHandle({id:1})">todo</button>
+        </uni-collapse-item>
+      </uni-collapse>
+    </uni-section>
   </view>
 </template>
-
 <script setup lang="ts">
      import { GlobalStore } from '@/store/modules/global'
      import { onBeforeMount, onMounted, nextTick, ref, reactive } from 'vue'

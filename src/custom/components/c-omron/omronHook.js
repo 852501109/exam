@@ -1,4 +1,4 @@
-import {ref, reactive, onMounted} from 'vue'
+import {ref, reactive, onMounted, computed} from 'vue'
 import { parseDate } from '@/common/tool.js'
 export default function () {
 	onMounted(() => {
@@ -44,7 +44,7 @@ export default function () {
 	  10010: '已连接',
 	  10011: '配对设备需要配对码',
 	  10012: '连接超时',
-	  10023: '连接 deviceId 为空或者是格式不正确',
+	  10013: '连接 deviceId 为空或者是格式不正确',
 	})
 	const characteristicId = reactive({
 		//支持写入操作的特征值
@@ -68,7 +68,29 @@ export default function () {
 		//测量时间
 		TME: ''
 	})
-	const DEVICE_STATE = {
+	const INFO_TEXT = reactive({
+		"SEARCHING": {
+			text: "正在搜索血压计",
+			type: "normal"
+		},
+		"CONNECTED": {
+			text: "已经连接血压计",
+			type: "normal"
+		},
+		"FINISHED": {
+			text: "完成读取血压值",
+			type: "normal"
+		},
+		"ERROR": {
+			text: "血压计出错",
+			type: "error"
+		},
+		"BLEOFF": {
+			text: "未连接血压计",
+			type: "error"
+		}
+	})
+	const DEVICE_STATE = reactive({
 		BLEOFF: 'BLEOFF',
 		SEARCHING: 'SEARCHING',
 		CONNECTED: 'CONNECTED',
@@ -77,7 +99,10 @@ export default function () {
 		RECEIVED: 'RECEIVED',
 		FINISHED: 'FINISHED',
 		ERROR: 'ERROR'
-	}
+	})
+	const infoText = computed(() => {
+		return INFO_TEXT[deviceState.value].text
+	}) 
 	const deviceState = ref(DEVICE_STATE.BLEOFF)
 	/* 测一次 */
 	const onece = async () => {
@@ -106,11 +131,14 @@ export default function () {
 		stopButtonDisable.value = true
 		resetAll()
 	}
+	const resetPageState = () => {
+		deviceState.value = DEVICE_STATE.BLEOFF
+	}
 	/* 重置所有值 */
 	const resetAll = async () => {
 		stopBTSearch()
 		closeBT()
-		// resetResult()
+		resetPageState()
 		resetConnection()
 	}
 	const resetConnection = () => {
@@ -211,9 +239,11 @@ export default function () {
 	}
 	/* 开启搜索监听 */
 	const initSearchWatch = () => {
+		deviceState.value = DEVICE_STATE.SEARCHING
+		console.log(deviceState.value)
 		return new Promise((resolve, reject) => {
 			const serviceTimeOut = setTimeout(() => {
-				reject('超时')
+				deviceState.value = DEVICE_STATE.BLEOFF
 				uni.showToast({
 					title: '搜索设备超时',
 					icon: 'error'
@@ -227,7 +257,6 @@ export default function () {
 					let find = false
 					let deviceArr = []
 					const device_name = res.devices[0].localName || res.devices[0].name
-					console.log(device_name)
 					if (typeof deviceNameBegin.value === 'string') {
 					  deviceArr = [deviceNameBegin.value]
 					} else {
@@ -266,6 +295,7 @@ export default function () {
 				},
 				(res) => {
 					console.log(`等待连接成功:${res.code}--${res.message}`)
+					deviceState.value = DEVICE_STATE.CONNECTED
 					resolve(res)
 				},
 				(res) => {
@@ -288,6 +318,7 @@ export default function () {
 	    holder.closeBLEConnection({
 	      deviceId: deviceId.value,
 	      success: res => {
+			deviceState.value = INFO_TEXT.BLEOFF
 	        console.log('断开蓝牙连接成功')
 	        resolve(res)
 	      },
@@ -303,7 +334,6 @@ export default function () {
 	}
 	/* 获取设备服务值 */
 	const getServiceVal = () => {
-		console.log(deviceId.value)
 		return new Promise((resolve, reject) => {
 			setTimeout(() => {
 				KY_UNI.getBLEDeviceServices(
@@ -311,10 +341,7 @@ export default function () {
 						deviceId: deviceId.value
 					},
 					(res) => {
-						console.log(deviceId.value)
-						console.log(`成功服务值---:${JSON.stringify(res)}`)
 						const serviceList = res.services.slice()
-						console.log(serviceList)
 						for (let i = 0; i < serviceList.length; i++) {
 						  const service = serviceList[i]
 						  console.log(JSON.stringify(service) + '----serviceID：' + service.uuid)
@@ -430,52 +457,9 @@ export default function () {
 					deviceResult.sys_value = result.sys_value,
 					deviceResult.dia_value = result.dia_value,
 					deviceResult.pul_value = result.pul_value
-			   }
+			   } 
 			}
 		)
-	}
-	/* 写入命令 */
-	const writeOrder = (writeCode) => {
-		if (!isBluetoothNotified.value) {
-		  console.log('not isBluetoothNotified')
-		  setProto().then(() => {
-			 setTimeout(() => { writeData(writeCode)},1000)
-		  })
-		} else {
-		  writeData(writeCode)
-		}
-	}
-	/* 写数据 */
-	const writeData = (writeCode) => {
-		return new Promise((resolve, reject) => {
-			KY_UNI.writeBLECharacteristicValue(
-				{
-					deviceId: deviceId.value,
-					serviceId: "0000FFF0-0000-1000-8000-00805F9B34FB",
-					characteristicId: "0000FFF2-0000-1000-8000-00805F9B34FB",
-					value: writeCode
-				},
-				(res) => {
-					resolve(res)
-					// 写入数据成功后禁止操作按钮		
-					startButtonDisable.value = true
-					
-					showFinalResult.value = true
-					// 写入成功重置上次数据
-					resetResult()
-					console.log(`写入数据成功---:${JSON.stringify(res)}`)
-				},
-				(res) => {
-					reject(res)
-					console.log(`写入数据失败---:${JSON.stringify(res)}`)
-					uni.showToast({
-						title: status[res.code],
-						icon: 'error'
-					})
-				}
-			)
-		})
-		
 	}
 	/* 关闭蓝牙设备器 */
 	const closeBT = () => {
@@ -513,6 +497,8 @@ export default function () {
 		}
 	}
 	return {
+		// 血压计测量状态
+		infoText,
 		// 按钮禁用状态
 		startButtonDisable,
 		stopButtonDisable,
@@ -552,8 +538,6 @@ export default function () {
 		setProto,
 		// 开启服务协议监听：监听血压实时返回结果
 		openProtoWatch,
-		// 写入命令
-		writeOrder,
 		// 关闭蓝牙
 		closeBT,
 		// 解析血压计返回的即时数值

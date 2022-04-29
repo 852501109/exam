@@ -4,7 +4,7 @@
       <view class="user_info">
         <image src="./test.png" mode=""></image>
         <view class="name_phone">
-          <text class="name">陈医生</text>
+          <text class="name">坤医生</text>
           <!-- 					<view class="weight">普通用户</view> -->
         </view>
         <text>15210622405</text>

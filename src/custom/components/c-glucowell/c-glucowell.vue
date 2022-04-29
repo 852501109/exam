@@ -1,7 +1,6 @@
 <template>
 	<view>
-		<view>蓝牙流程统计</view>
-		<text class="tips">【欧姆龙】完成血压测量后，点击按钮</text>
+		<text class="tips">预留组件插槽，对接血糖仪</text>
 		<button @tap="init">初始化蓝牙</button>
 		<button @tap="openConectWatch">开启连接监听</button>
 		<button @tap="startBTSearch">启动蓝牙搜索</button>
@@ -14,22 +13,36 @@
 		<button @tap="openProtoWatch">开启服务协议通讯监听</button>
 		<button @tap="writeData">写数据</button>
 		<button @tap="closeBT">关闭蓝牙适配器</button>
-		<text  class="tips">总体流程</text>
-		<button @tap="onece" :disabled="startButtonDisable">连接血压计</button>
-		<text class="text-info">{{infoText}}</text>
-		<view class="">
-		  <text>收缩压: {{deviceResult.sys_value}}</text>
-		</view>
-		<view class="">
-		  <text>舒张压: {{deviceResult.dia_value}}</text>
-		</view>
-		<view class="">
-		  <text>脉搏: {{deviceResult.pul_value}}</text>
-		</view>
+		<text 	class="tips">总体流程</text>
+		<button @tap="onece" :disabled="startButtonDisable">开始测量血压</button>
+		<button @tap="onClickStop" :disabled="stopButtonDisable">终止测量血压</button>
+	</view>
+	<view class="info">
+	  <text class="text-info">{{infoText}}</text>
+	</view>
+	<view v-if="showFinalResult">
+	  <view class="">
+	    <text class="info-text">动态血压值{{measureResult.PRS}}</text>
+	  </view>
+	  <view class="">
+	    <text>用户编号: {{measureResult.USR}}</text>
+	  </view>
+	  <view class="">
+	    <text>测量时间: {{measureResult.TME}}</text>
+	  </view>
+	  <view class="">
+	    <text>收缩压值: {{measureResult.SYS}}</text>
+	  </view>
+	  <view class="">
+	    <text>舒张压值: {{measureResult.DIA}}</text>
+	  </view>
+	  <view class="">
+	    <text>脉搏值: {{measureResult.PUL}}</text>
+	  </view>
 	</view>
 </template>
 <script setup>
-	import omronHook from "./omronHook"
+	import maiboboHook from "./maiboboHook"
 	const {
 		// 设备连接状态
 		infoText,
@@ -39,7 +52,7 @@
 		// 是否显示结果
 		showFinalResult,
 		// 血压结果
-		deviceResult, 
+		measureResult, 
 		// 开始测量血压
 		onece,
 		// 停止测量血压
@@ -74,11 +87,14 @@
 		setProto,
 		// 开启服务协议监听：监听血压实时返回结果
 		openProtoWatch,
+		// 写入命令
+		writeOrder,
 		// 关闭蓝牙
 		closeBT,
 		// 解析血压计返回的即时数值
 		parseBLEResponse
-	} = omronHook()
+	} = maiboboHook()
 </script>
+
 <style>
 </style>

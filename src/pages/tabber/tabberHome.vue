@@ -6,15 +6,26 @@
 !-->
 <template>
   <view>
-    <view>vue3兼容部分vue2</view>
-    <!--    <view>
-      <h3>示例8:maibobo蓝牙设备</h3>
-      <c-maibobo />
-    </view> -->
-    <view>
-      <h3>示例11:OMRON蓝牙设备</h3>
-      <c-omron />
-    </view>
+    <view>&nbsp;&nbsp;&nbsp;设备示例</view>
+    <uni-section title="组件说明" type="line">
+      <uni-collapse v-model="accordionVal" accordion @change="change">
+        <uni-collapse-item title="脉搏波">
+          <view class="content">
+            <c-maibobo />
+          </view>
+        </uni-collapse-item>
+        <uni-collapse-item title="欧姆龙">
+          <view class="content">
+            <c-omron />
+          </view>
+        </uni-collapse-item>
+        <uni-collapse-item title="websocket">
+          <view class="content">
+            <c-websocket />
+          </view>
+        </uni-collapse-item>
+      </uni-collapse>
+    </uni-section>
   </view>
 </template>
 <script setup></script>
