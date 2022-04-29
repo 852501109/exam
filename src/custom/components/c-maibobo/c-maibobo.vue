@@ -13,14 +13,14 @@
 		<button @tap="openProtoWatch">开启服务协议通讯监听</button>
 		<button @tap="writeData">写数据</button>
 		<button @tap="closeBT">关闭蓝牙适配器</button>
-		<text 	class="tips">总体流程</text>
+		<text class="tips">总体流程</text>
 		<button @tap="onece" :disabled="startButtonDisable">开始测量血压</button>
 		<button @tap="onClickStop" :disabled="stopButtonDisable">终止测量血压</button>
 	</view>
 	<view class="info">
 	  <text class="text-info">{{infoText}}</text>
 	</view>
-	<view v-if="showFinalResult">
+	<view>
 	  <view class="">
 	    <text class="info-text">动态血压值{{measureResult.PRS}}</text>
 	  </view>

@@ -211,10 +211,10 @@ export default function () {
 				},
 				(res) => {
 					reject(res)
-					// uni.showToast({
-					// 	title: status[res.code],
-					// 	icon: 'error'
-					// })
+					uni.showToast({
+						title: status[res.code],
+						icon: 'error'
+					})
 				}
 			)
 		})
@@ -299,11 +299,10 @@ export default function () {
 					resolve(res)
 				},
 				(res) => {
-					console.log(status[res.code])
-					// uni.showToast({
-					// 	title: status[res.code],
-					// 	icon: 'error'
-					// })
+					uni.showToast({
+						title: status[res.code],
+						icon: 'error'
+					})
 					reject(res)
 				}
 			)
@@ -323,10 +322,10 @@ export default function () {
 	      },
 	      fail: res => {
 	        reject(res)
-			// uni.showToast({
-			// 	title: status[res.code],
-			// 	icon: 'error'
-			// })
+			uni.showToast({
+				title: status[res.code],
+				icon: 'error'
+			})
 	      },
 	    })
 	  })
@@ -358,10 +357,10 @@ export default function () {
 					(res) => {
 						console.log(`失败服务值---:${JSON.stringify(res)}`)
 						reject(res)
-						// uni.showToast({
-						// 	title: status[res.code],
-						// 	icon: 'error'
-						// })
+						uni.showToast({
+							title: status[res.code],
+							icon: 'error'
+						})
 					}
 				)
 			}, 2500)
@@ -411,10 +410,10 @@ export default function () {
 				(res) => {
 					reject(res)
 					console.log(`失败服务值---:${JSON.stringify(res)}`)
-					// uni.showToast({
-					// 	title: status[res.code],
-					// 	icon: 'error'
-					// })
+					uni.showToast({
+						title: status[res.code],
+						icon: 'error'
+					})
 				}
 			)
 		})
@@ -440,10 +439,10 @@ export default function () {
 			    },
 			    res => {
 					console.log(JSON.stringify(res))
-					// uni.showToast({
-					// 	title: status[res.code],
-					// 	icon: 'error'
-					// })
+					uni.showToast({
+						title: status[res.code],
+						icon: 'error'
+					})
 			    }
 			)
 		})
