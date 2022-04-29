@@ -9,25 +9,23 @@
           <childTwo v-model="stateTwo.name" v-model:age="stateTwo.age" @updateName="updateName" />
         </uni-collapse-item>
         <uni-collapse-item title="父子组件通信示例3">
-          <childThree ref="childRef" />
+          <childTwo v-model="stateTwo.name" v-model:age="stateTwo.age" @updateName="updateName" />
         </uni-collapse-item>
         <uni-collapse-item title="nextTick演示">
-          <childTwo v-model="stateTwo.name" v-model:age="stateTwo.age" @updateName="updateName" />
+          <childThree ref="childRef" />
         </uni-collapse-item>
-        <uni-collapse-item title="父子组件通信示例3">
-          <childTwo v-model="stateTwo.name" v-model:age="stateTwo.age" @updateName="updateName" />
-        </uni-collapse-item>
-        <uni-collapse-item title="hook示例">
+        <uni-collapse-item title="当前求和">
           <h2>当前求和:{{ sum }}</h2>
           <button @click="changeNum">点我加一</button>
-          <hr />
+        </uni-collapse-item>
+        <uni-collapse-item title="hook使用示例">
           <h2 @click="savePonint">当前鼠标点击坐标为:x:{{ point.x }},y:{{ point.y }}</h2>
         </uni-collapse-item>
         <uni-collapse-item title="测试provide和inject方式传参">
           <childFour />
         </uni-collapse-item>
         <uni-collapse-item title="uni-ui图标">
-          <childTwo v-model="stateTwo.name" v-model:age="stateTwo.age" @updateName="updateName" />
+          <uni-icons type="contact" size="30"></uni-icons>
         </uni-collapse-item>
         <uni-collapse-item title="sqlite">
           <button @click="initSqlite">sqlite</button>
@@ -39,6 +37,7 @@
     </uni-section>
   </view>
 </template>
+
 <script setup lang="ts">
      import { GlobalStore } from '@/store/modules/global'
      import { onBeforeMount, onMounted, nextTick, ref, reactive } from 'vue'
