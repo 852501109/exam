@@ -34,10 +34,7 @@
       <h3>示例7:uni-ui图标</h3>
       <uni-icons type="contact" size="30"></uni-icons>
     </view>
-    <view>
-      <h3>示例8:蓝牙设备</h3>
-      <c-bluetooth />
-    </view>
+
     <view>
       <h3>示例9:sqlite</h3>
       <button @click="initSqlite">sqlite</button>

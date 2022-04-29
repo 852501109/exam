@@ -121,6 +121,20 @@
                     "pid" : "",
                     "parameters" : {}
                 }
+            },
+            "KY-KunYuBluetooth" : {
+                "__plugin_info__" : {
+                    "name" : "KY-KunYuBluetooth",
+                    "description" : "本插件封装了低功耗蓝牙开发的api，修复解决官方的蓝牙通讯协议Notify和Indicate 协议监听问题，适合各种蓝牙设备通讯（血压计、血糖仪、体重秤、打印机等等设备）。",
+                    "platforms" : "Android",
+                    "url" : "https://ext.dcloud.net.cn/plugin?id=5801",
+                    "android_package_name" : "uni.UNI5EB2FE1",
+                    "ios_bundle_id" : "",
+                    "isCloud" : true,
+                    "bought" : 1,
+                    "pid" : "5801",
+                    "parameters" : {}
+                }
             }
         }
     },

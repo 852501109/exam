@@ -7,15 +7,17 @@
 <template>
   <view>
     <view>vue3兼容部分vue2</view>
-    <pressure @setPressure="setPressure"></pressure>
+    <!--    <view>
+      <h3>示例8:maibobo蓝牙设备</h3>
+      <c-maibobo />
+    </view> -->
+    <view>
+      <h3>示例11:OMRON蓝牙设备</h3>
+      <c-omron />
+    </view>
   </view>
 </template>
-<script setup>
-  import pressure from '@/components/diseaseVisit/bluetooth/pressure'
-  const setPressure = res => {
-    console.log(res)
-  }
-</script>
+<script setup></script>
 <style scoped lang="scss">
   view {
   	margin-top: 100rpx;

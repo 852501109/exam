@@ -135,6 +135,7 @@ export default {
             deviceNameBegin = this.deviceNameBegin
           }
           deviceNameBegin.forEach(device => {
+			  console.log(device_name.toLowerCase())
             if (device_name.toLowerCase().startsWith(device.toLowerCase())) {
               find = true
             }

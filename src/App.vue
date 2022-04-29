@@ -21,38 +21,67 @@
   		// }
   		//检验当前版本是不是最新
   		// 热更新
-  		plus.runtime.getProperty(plus.runtime.appid, function(widgetInfo) {
-  			uni.request({
-  				url: 'http://www.example.com/update/',
-  				data: {
-  					version: widgetInfo.version,
-  					name: widgetInfo.name
-  				},
-  				success: (result) => {
-  					const data = result.data
-  					if (data.update && data.wgtUrl) {
-  						uni.downloadFile({
-  							url: data.wgtUrl,
-  							success: (downloadResult) => {
-  								if (downloadResult.statusCode === 200) {
-  									plus.runtime.install(downloadResult
-  										.tempFilePath, {
-  											force: false
-  										},
-  										function() {
-  											console.log('install success...')
-  											plus.runtime.restart()
-  										},
-  										function(e) {
-  											console.error('install fail...')
-  										})
-  								}
-  							}
-  						})
-  					}
-  				}
-  			})
-  		})
+  //  uni.showModal({
+  // title: '已发现新版本',
+  // content: '确认更新？',
+  // success: function(res) {
+  //  if (res.confirm) {
+  // 	console.log('开始热更新')
+  // 	  uni.downloadFile({
+  // 		url: 'http://192.168.1.250:60101/__UNI__5EB2FE1.wgt',
+  // 		success: (downloadResult) => {
+  // 			if (downloadResult.statusCode === 200) {
+  // 				plus.runtime.install(downloadResult
+  // 					.tempFilePath, {
+  // 						force: true
+  // 					},
+  // 					function() {
+  // 						console.log('install success...')
+  // 						plus.runtime.restart()
+  // 					},
+  // 					function(e) {
+  // 						console.error(e)
+  // 					})
+  // 			}
+  // 		}
+  // 	  })
+  // }
+
+  // }
+  //  })
+
+  		// plus.runtime.getProperty(plus.runtime.appid, function(widgetInfo) {
+  		// 	uni.request({
+  		// 		url: 'http://www.example.com/update/',
+  		// 		data: {
+  		// 			version: widgetInfo.version,
+  		// 			name: widgetInfo.name
+  		// 		},
+  		// 		success: (result) => {
+  		// 			const data = result.data
+  		// 			if (data.update && data.wgtUrl) {
+  		// 				uni.downloadFile({
+  		// 					url: './__UNI__5EB2FE1.wgt',
+  		// 					success: (downloadResult) => {
+  		// 						if (downloadResult.statusCode === 200) {
+  		// 							plus.runtime.install(downloadResult
+  		// 								.tempFilePath, {
+  		// 									force: false
+  		// 								},
+  		// 								function() {
+  		// 									console.log('install success...')
+  		// 									plus.runtime.restart()
+  		// 								},
+  		// 								function(e) {
+  		// 									console.error('install fail...')
+  		// 								})
+  		// 						}
+  		// 					}
+  		// 				})
+  		// 			}
+  		// 		}
+  		// 	})
+  		// })
   		// 以下是整包更新
   		// const appId = plus.runtime.appid
   		// const version = plus.runtime.version
