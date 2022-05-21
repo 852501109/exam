@@ -56,6 +56,7 @@ module.exports = {
     curly: 'warn',
     // 要求 switch 语句中有 default 分支
     'default-case': 'warn',
+    "vue/multi-word-component-names":"off",
     // 强制尽可能地使用点号
     'dot-notation': 'warn',
     // 要求使用 === 和 !==
@@ -70,6 +71,7 @@ module.exports = {
     'no-multi-spaces': 'warn',
     // 禁止多次声明同一变量
     'no-redeclare': 'warn',
+	'no-undef': 'off',
     // 禁止在 return 语句中使用赋值语句
     'no-return-assign': 'warn',
     // 禁用不必要的 return await
@@ -146,16 +148,13 @@ module.exports = {
     'no-extra-boolean-cast': 'warn',
     'no-case-declarations': 'warn',
     'no-async-promise-executor': 'warn',
+	"vue/multi-word-component-names":"off",
   },
   globals: {
     defineProps: 'readonly',
     defineEmits: 'readonly',
     defineExpose: 'readonly',
-    withDefaults: 'readonly',
-	uni: true, 
-	wx: true,
-	plus: true,
-	cTimerBtn: true
+    withDefaults: 'readonly'
   },
 }
 

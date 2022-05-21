@@ -7,8 +7,11 @@
   	getIOSVersions,
   	tokenVerify
   } from '@/utils/request/updata.js'
+  import $api from '@/data/service/initService.js'
   export default {
   	onLaunch: function() {
+       /* 初始化 */
+        $api.initAll()
   		// plus.screen.lockOrientation("portrait-primary")
   		// 在这里打开数据库全局打开一次即可
   		// try {
@@ -196,7 +199,11 @@
 </script>
 
 <style lang="scss">
-  @import "./assets/scss/mixin.scss";
-  @import "./uni.scss";
-  /*每个页面公共css */
+
+  page {
+   width: 100vw;
+   height: 100%;
+   overflow: hidden;
+  }
+    /*每个页面公共css */
 </style>

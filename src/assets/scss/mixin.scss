@@ -6,6 +6,17 @@
 /* flex 例 @include flex(row,flex-start,flex-start,wrap)*/
 
 @mixin flex ($direction: row, $justify-content: flex-start, $align-items: flex-start,$flex-wrap: nowrap) {
+	box-sizing: border-box;
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify-content;
+    align-items: $align-items;
+	margin: 0 auto;
+    flex-wrap: $flex-wrap;
+}
+
+@mixin flex-two ($direction: row, $justify-content: flex-start, $align-items: flex-start,$flex-wrap: nowrap) {
+	box-sizing: border-box;
     display: flex;
     flex-direction: $direction;
     justify-content: $justify-content;
@@ -19,8 +30,28 @@
 	flex: $grow;
 	flex-shrink: $shrink;
 }
-/* 宽度高度混入 使用示例 @include w-h(100, 100) */
 
+@mixin head-nav() {
+	width: 100%;
+	height: 100rpx;
+	margin-top: 30rpx;
+	::v-deep .left {
+		font-size: $top-nav-font;
+	}
+	button {
+		width: 100rpx;
+		padding: 3rpx 10rpx;
+		letter-spacing: 5rpx;
+	}
+}
+
+@mixin body-box() {
+	width: 100%;
+	height: auto;
+	padding: 60rpx;
+}
+
+/* 宽度高度混入 使用示例 @include w-h(100, 100) */
 @mixin w-h($w: auto, $h: auto) {
   @if $w != auto {
     width: #{$w}rpx;
@@ -71,7 +102,6 @@
 }
 
 /* 文字不换行  */
-
 @mixin no-wrap(){
   text-overflow: ellipsis;
   overflow: hidden;
@@ -79,7 +109,6 @@
 }
 
 /* 扩展点击区域 */
-
 @mixin extend-click(){
   position: relative;
   &:before{
@@ -93,7 +122,6 @@
 }
 
 /* 多行文本溢出 */
-
 @mixin multiEllipsis($line:2){
     overflow : hidden;
     word-break: break-all;
@@ -104,7 +132,6 @@
 }
 
 /* 透明度 */
-
 @mixin opacity($opacity) {
     opacity: $opacity;
     $opacity-ie: $opacity * 100;
@@ -112,7 +139,6 @@
 }
 
 /* 清除浮动 */
-
 @mixin clearfix() {
     &:before,
     &:after {
@@ -125,13 +151,13 @@
 }
 
 /* 美化占位符 placeholder 样式 */
-
 @mixin beauty-placeholder($fz, $color: #999, $align: left) {
   &:-moz-placeholder {
     font-size: $fz;
     color: $color;
     text-align: $align;
   }
+  
   &:-ms-input-placeholder {
     font-size: $fz;
     color: $color;

@@ -435,10 +435,8 @@ export default function () {
 					if(!isBluetoothNotified.value) {
 						isBluetoothNotified.value = true
 					}
-					console.log(JSON.stringify(res))
 			    },
 			    res => {
-					console.log(JSON.stringify(res))
 					uni.showToast({
 						title: status[res.code],
 						icon: 'error'

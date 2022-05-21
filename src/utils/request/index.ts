@@ -18,6 +18,7 @@ const request = (config: UniApp.RequestOptions) => {
   let url: string
   // 如果是以http/https开头的则不添加VITE_REQUEST_BASE_URL
   url = import.meta.env.VITE_REQUEST_BASE_URL + config.url
+  console.log(url)
   return new Promise<responseType>((resolve, reject) => {
     uni.request({
       ...config,

@@ -57,6 +57,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "pinia": "^2.0.13",
+    "postcss-loader": "^6.2.1",
     "sass": "^1.50.0",
     "vue": "^3.2.31",
     "vue-i18n": "^9.1.9"
@@ -66,7 +67,7 @@
     "@dcloudio/uni-automator": "3.0.0-alpha-3031320220314002",
     "@dcloudio/uni-cli-shared": "3.0.0-alpha-3031320220314002",
     "@dcloudio/vite-plugin-uni": "3.0.0-alpha-3031320220314002",
-    "autoprefixer": "^10.4.2",
+    "autoprefixer": "^8.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^15.0.0",

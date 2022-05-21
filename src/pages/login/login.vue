@@ -1,210 +1,192 @@
 <template>
   <view class="page_wrapper">
-    <view class="title">
-      您好,
-      <br />
-      欢迎使用体检采集端
-    </view>
+    <view class="title">账号密码登录</view>
     <view class="login_form">
       <view class="form_item">
-        <text>手机号</text>
         <view class="input_wrapper">
-          <input
+          <uni-easyinput
             v-model="form.cell"
-            :placeholderStyle="holder.cell.color"
+            :input-border="false"
+            :placeholder-style="holder.cell.color"
             :placeholder="holder.cell.text"
+            class="custom_easyinput"
             type="text"
           />
+          <view v-if="holder.cell.empty" class="detail_toast">账号不存在</view>
         </view>
       </view>
       <view class="form_item">
-        <text>密码</text>
         <view class="input_wrapper">
-          <input
+          <uni-easyinput
             v-model="form.pwd"
-            :placeholderStyle="holder.pwd.color"
-            type="password"
+            :input-border="false"
+            :placeholder-style="holder.pwd.color"
             :placeholder="holder.pwd.text"
+            class="custom_easyinput"
+            type="password"
           />
+          <view v-if="holder.pwd.empty" class="detail_toast">密码错误</view>
         </view>
       </view>
-      <view class="forget" @click="goForgetPassword">忘记密码?</view>
-      <view class="login_btn operation_btn" @click="login">登录</view>
-      <view class="register_btn operation_btn" @click="goRegister">注册</view>
+      <view class="form_item">
+        <view class="save_pwd">
+          <checkbox-group @change="remenber">
+            <checkbox value="cb" :checked="isRemenber" style="transform:scale(0.85)" />
+            记住密码
+          </checkbox-group>
+        </view>
+        <c-link></c-link>
+      </view>
+      <view
+        class="submit_btn"
+        :class="{'disable_btn': isDisabled, 'success_btn': !isDisabled}"
+        @click="login"
+      >
+        登录
+      </view>
+      <view class="version">{{store.version}}</view>
     </view>
   </view>
 </template>
 
 <script setup>
-  import { GlobalStore } from '@/store/modules/global'
-  import { onBeforeMount, onMounted, nextTick, ref, reactive } from 'vue'
-  const holder = reactive({
-  	cell: {
-  	  color: '',
-  	  text:'请输入您的手机号',
-  	  isRequire:'手机号不能为空',
-  	  normal: '请输入您的手机号'
-  	},
-  	pwd: {
-  	  color: '',
-  	  text: '请输入您的密码',
-  	  isRequire:'密码不能为空',
-  	  normal: '请输入您的密码'
-  	}
-  })
-  const form = reactive({
-  	cell: '',
-  	pwd: ''
-  })
-  const goForgetPassword = () => {
-  	uni.navigateTo({
-  		url: './forgetPassword'
-  	})
+  import { userStore } from '@/store/modules/user'
+   import {
+   	onBeforeMount,
+   	onMounted,
+   	nextTick,
+   	ref,
+    watch ,
+   	reactive,
+   	computed
+   } from 'vue'
+   import cjdUserService from '@/data/service/cjdUserService.js'
+   // 记住密码
+   const store = userStore()
+   const isRemenber = ref(false)
+   onMounted(() => {
+   	uni.hideTabBar()
+   	form.cell = store.userInfo ? store.userInfo.username : ''
+    form.pwd = store.isRemenber ? store.userInfo.password : ''
+       isRemenber.value = store.isRemenber ? store.isRemenber : 1
+   })
+   const holder = reactive({
+   	cell: {
+   		color: '',
+   		text: '请输入您的账号',
+   		isRequire: '请输入账号',
+   		normal: '请输入您的账号',
+  empty: false
+   	},
+   	pwd: {
+   		color: '',
+   		text: '请输入您的密码',
+   		isRequire: '请输入密码',
+   		normal: '请输入您的密码',
+  empty: false
+   	}
+   })
+   const form = reactive({
+   	cell: '',
+   	pwd: ''
+   })
+   const isDisabled = computed(() => {
+   	let is = false
+   	Object.keys(form).forEach(key => {
+   		if (holder[key].color || !form[key]) {
+   			is = true
+   		}
+   	})
+   	return is
+   })
+   /* 监听校验 */
+   watch (form, (newValue, oldValue) => {
+     checkEmpty() && checkLogin()
+   })
+   const remenber = e => {
+      console.log(e.detail.value.length)
+      isRemenber.value = e.detail.value.length > 0
+   }
+   const checkEmpty = () => {
+   	let isEmpty = true
+   	Object.keys(form).forEach(key => {
+   		if (!form[key]) {
+   			holder[key].text = holder[key].isRequire
+   			holder[key].color = 'color:#f00;'
+   			isEmpty = false
+   		} else {
+   			holder[key].text = holder[key].normal
+   			holder[key].color = ''
+   		}
+   	})
+   	return isEmpty
+   }
+   // 提示消息框
+   const toast = (text) => {
+   	uni.showToast({
+   		title: text,
+   		icon: 'none',
+   		duration: 2000
+   	})
+   }
+   // 登录校验  return Boolean
+   const checkLogin = () => {
+   	// 手机号正则
+   	const myreg = /^[0-9]{11}$/
+   	// 手机号正则校验
+   	if (!form.cell) {
+   		return false
+   	}
+   	return true
+   }
 
-  }
-  const checkEmpty = () => {
-          let isEmpty = true
-          Object.keys(form).forEach(key => {
-            if(!form[key]) {
-              holder[key].text = holder[key].isRequire
-              holder[key].color = 'color:#f00;'
-              isEmpty = false
-            } else {
-              holder[key].text = holder[key].normal
-              holder[key].color = ''
-            }
-          })
-          return isEmpty
-        }
-  // 提示消息框
-  const toast = (text) => {
-    uni.showToast({
-      title: text,
-      icon: 'none',
-      duration: 2000
+
+   // 跳转到ip设置界面
+   const toipSetting = () => {
+    uni.navigateTo({
+    	url: '/pages/ipsetting/ipsetting'
     })
-  }
-  			// 登录校验  return Boolean
-  			const checkLogin = () => {
-  				// 手机号正则
-  				const myreg = /^[0-9]{11}$/
-  				// 手机号正则校验
-  				if (!myreg.test(form.cell)) {
-  					toast('手机号输入不正确')
-  						return false
-  					}
-  				return true
-  			}
-  			const goRegister = () => {
-  				uni.navigateTo({
-  					url: './register'
-  				})
-  			}
-  			// const isLogin = () => {
-  			// 	const info = userInfo
-  			// 	if (info && info.token) {
-  			// 		if (info.auth) {
-  			// 			uni.switchTab({
-  			// 				url: '/pages/tabber/tabberHome'
-  			// 			})
-  			// 		} else {
-
-  			// 			uni.navigateTo({
-  			// 				url: '/pages/tabber/tabberHome'
-  			// 			}, true)
-  			// 		}
-  			// 	}
-  			// }
-  			//
-  			const login = () => {
-  				if (checkEmpty() && checkLogin()) {
-  					const param = {
-  						mobile: form.cell,
-  						password: form.pwd,
-  					}
-  					uni.switchTab({
-  						url: '/pages/tabber/tabberHome'
-  					})
-  				}
-  	}
+   }
+   const login = () => {
+   	if (checkEmpty() && checkLogin()) {
+        store.setRemenber(isRemenber.value)
+        uni.setStorageSync("isRemenber", isRemenber.value)
+   		const param = {
+   			username: form.cell,
+   			password: form.pwd,
+   		}
+        cjdUserService.login(param, function(res) {
+           if(res.code === 200) {
+  	   if(res.data.length === 0) {
+  		   // 账号不存在
+  		   holder.cell.empty = true
+  		   holder.pwd.empty = false
+  	   } else {
+  		   // 密码错误
+  		  if(form.pwd !== res.data[0].password) {
+  			holder.cell.empty = false
+  			holder.pwd.empty = true
+  		  } else {
+  			// 密码正确
+  			// 添加全局缓存, 并且加入到全局数据管理里面
+  			  uni.setStorageSync('userInfo', JSON.stringify(res.data[0]))
+  			  store.setUserInfo(res.data[0])
+  			  uni.switchTab({
+  			  	url: '/pages/tabber/tabberHome'
+  			  })
+  		  }
+  	   }
+     }
+        })
+      }
+   }
 </script>
 
 <style lang="scss" scoped>
-  .page_wrapper {
-  	background: $uni-color-primary;
-  	.title {
-  		height: 498rpx;
-  		padding: 0 94rpx;
-  		box-sizing: border-box;
-  		display: flex;
-  		align-items: center;
-  		font-size: 48rpx;
-  		color: #FFF;
-  	}
-  	.login_form {
-  		padding:92rpx 94rpx;
-  		box-sizing: border-box;
-  		background: #fff;
-  		border-radius: 72rpx 72rpx 0rpx 0rpx;
-  		.form_item {
-  			display: flex;
-  			flex-direction: column;
-  			justify-content: space-between;
-  			padding: 26rpx 0;
-  			box-sizing: border-box;
-  			height: 162rpx;
-  			border-bottom: 1rpx solid #E9E9E9;
-  			margin-bottom: 20rpx;
-
-  			text {
-  				font-size: 36rpx;
-  				color: #333;
-  				font-weight: bold;
-  			}
-
-  			.input_wrapper {
-  				display: flex;
-  				justify-content: space-between;
-  				font-size: 28rpx;
-  				color: #dadada;
-
-  				image {
-  					width: 48rpx;
-  					height: 48rpx;
-  				}
-
-  			}
-
-  		}
-
-  		.forget {
-  			font-size: 24rpx;
-  			color: #adadad;
-  			margin-bottom: 100rpx;
-  		}
-
-  		.operation_btn {
-  			height: 116rpx;
-  			display: flex;
-  			justify-content: center;
-  			align-items: center;
-  			font-size: 32rpx;
-  			margin-bottom: 40rpx;
-  			border-radius: 50px;
-  			font-weight: 550;
-  		}
-
-  		.login_btn {
-  			background: $uni-color-primary;
-  			color: #FFF;
-  		}
-
-  		.register_btn {
-  			background: #F5F6FA;
-  			color: #333;
-  		}
-
-  	}
-
+  .login_form {
+     margin-top: 56.3rpx;
+     .save_pwd {
+     	font-size: 19.2rpx;
+     }
   }
 </style>

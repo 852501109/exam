@@ -1,23 +1,38 @@
 {
     "easycom" : {
         "custom" : {
-            "^c-(.*)" : "@/custom/components/c-$1/c-$1.vue"
+            "^c-(.*)" : "@/custom/components/c-$1/c-$1.vue",
+			"^uni-(.*)": "@/uni_modules/uni-$1/components/uni-$1/uni-$1.vue"
         }
     },
     "pages" : [
 		{
-		    "path" : "pages/tabber/tabberHome",
+		    "path" : "pages/login/login",
+		    "style" : {
+		        "navigationBarTitleText" : "登陆",
+		        "navigationStyle" : "custom"
+		    }
+		},
+		{
+		    "path" : "pages/tabber/tabberMine",
+		    "style" : {
+		        "navigationBarTitleText" : "我的",
+				"navigationStyle" : "custom"
+		    }
+		},
+		{
+		    "path" : "pages/tabber/testHome",
 		    "style" : {
 		        "navigationBarTitleText" : "首页1"
 		    }
 		},
-        {
-            "path" : "pages/login/login",
-            "style" : {
-                "navigationBarTitleText" : "登陆",
-                "navigationStyle" : "custom"
-            }
-        },
+		{
+		    "path" : "pages/modesetting/modesetting",
+		    "style" : {
+		        "navigationBarTitleText" : "系统配置",
+				"navigationStyle" : "custom"
+		    }
+		},
         {
             "path" : "pages/login/register",
             "style" : {
@@ -25,6 +40,7 @@
                 "navigationBarTitleText" : "注册"
             }
         },
+		
         {
             "path" : "pages/login/certification",
             "style" : {
@@ -47,12 +63,6 @@
             }
         },
 		{
-		    "path" : "pages/tabber/tabberMine",
-		    "style" : {
-		        "navigationBarTitleText" : "我的"
-		    }
-		},
-		{
 			"path": "pages/setting/mineSetting",
 			"style": {
 				"navigationBarTitleText": "设置"
@@ -70,12 +80,34 @@
             "path" : "App",
             "style" : {}
         }
+        ,{
+            "path" : "pages/ipsetting/ipsetting",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "主机ip",
+				"navigationStyle" : "custom"
+            }
+            
+        }
+        ,
+		{
+			"path" : "pages/tabber/tabberHome",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "健康体检",
+				"navigationStyle" : "custom"
+			}
+		}
     ],
     "globalStyle" : {
         "navigationBarTextStyle" : "black",
-        "navigationBarTitleText" : "uni-app",
+        "navigationBarTitleText" : "坤昱体检",
         "navigationBarBackgroundColor" : "#F8F8F8",
-        "backgroundColor" : "#F8F8F8"
+        "backgroundColor" : "#F8F8F8",
+		"scrollIndicator": "none",
+		"app-plus": {
+			"scrollIndicator": "none"
+		}
     },
     "tabBar" : {
         "color" : "#000",
@@ -84,12 +116,20 @@
         "backgroundColor" : " #fff",
         "list" : [
             {
-                "pagePath" : "pages/tabber/tabberHome",
-                "iconPath": "static/i1.png",
-                "selectedIconPath": "static/home_icon_activ2xe.png",
-                "text" : "首页",
+			    "pagePath" : "pages/tabber/tabberHome",
+			    "iconPath": "static/home1.png",
+			    "selectedIconPath": "static/home2.png",
+			    "text" : "",
 				"iconWidth": "26px"
-            },
+			},
+            {
+                "pagePath" : "pages/tabber/testHome",
+                "iconPath": "static/home1.png",
+                "selectedIconPath": "static/home2.png",
+                "text" : "",
+				"iconWidth": "26px"
+            }
+			,
 			{
 			    "pagePath" : "pages/tabber/tabberMy",
 			    "iconPath": "static/home_ketang_2x.png",
@@ -99,9 +139,9 @@
 			},
 			{
 			    "pagePath" : "pages/tabber/tabberMine",
-			    "iconPath": "static/home_wode_2.png",
-			    "selectedIconPath": "static/a3.png",
-			    "text" : "我的",
+			    "iconPath": "static/my1.png",
+			    "selectedIconPath": "static/my2.png",
+			    "text" : "",
 				"iconWidth": "26px"
 			}
         ]
